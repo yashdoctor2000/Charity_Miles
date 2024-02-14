@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "553249730239",
+    "project_id": "charitymiles-a17a3",
+    "storage_bucket": "charitymiles-a17a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553249730239:android:066f8f69ce399aebdf200a",
+        "android_client_info": {
+          "package_name": "com.example.charitymiles"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUkPdDMESaKJFljTpCRFFsxgugZ1RIQLc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
