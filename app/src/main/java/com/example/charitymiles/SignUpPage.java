@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -27,28 +29,15 @@ public class SignUpPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
 
-//        firestore = FirebaseFirestore.getInstance();
-//        Map<String,Object> user =new HashMap<>();
-//        user.put("firstname","Yash");
-//        user.put("Lastname","Doctor");
-//
-//        firestore.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//            @Override
-//            public void onSuccess(DocumentReference documentReference) {
-//                Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_LONG).show();
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(getApplicationContext(),"Failure",Toast.LENGTH_LONG).show();
-//            }
-//        });
-
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef= database.getReference();
         nameEditText = findViewById(R.id.nameEditText);
         addressEditText = findViewById(R.id.addressEditText);
         mobileNumberEditText = findViewById(R.id.mobileNumberEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         signUpButton = findViewById(R.id.signUpButton);
+
+        myRef.setValue("Hello World!");
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
