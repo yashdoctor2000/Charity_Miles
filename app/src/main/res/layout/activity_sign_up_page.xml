@@ -37,10 +37,18 @@
         android:inputType="phone"/>
 
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/mobileNumberEditText"
+        android:hint="Username"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usernameEditText"
         android:hint="Password"
         android:inputType="textPassword"/>
 
