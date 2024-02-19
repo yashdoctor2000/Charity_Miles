@@ -3,6 +3,7 @@ package com.example.charitymiles;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -159,6 +160,8 @@ public class SignUpPage extends AppCompatActivity {
 
         myRef.child(userId).setValue(user).addOnSuccessListener(aVoid -> {
             Toast.makeText(SignUpPage.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SignUpPage.this, MainActivity.class);
+            startActivity(intent);
         }).addOnFailureListener(e -> {
             Toast.makeText(SignUpPage.this, "Failed to register user", Toast.LENGTH_SHORT).show();
         });
