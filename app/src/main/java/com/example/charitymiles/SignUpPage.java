@@ -147,20 +147,23 @@ public class SignUpPage extends AppCompatActivity {
 
     private void saveUserData(String name, String address, String mobileNumber, String password, String role, String username) {
         // Creating a unique ID for each user (or you can use the mobile number if it's unique)
+        FirebaseUser fuser = mAuth.getCurrentUser();
+        if(fuser !=null) {
+            String userId = fuser.getUid();
+            Map<String, Object> user = new HashMap<>();
+            user.put("name", name);
+            user.put("address", address);
+            user.put("mobileNumber", mobileNumber);
+            user.put("role", role);
+            user.put("username", username); // Consider using a more secure way to store user passwords or sensitive information
 
-
-        String userId = myRef.push().getKey();
-        Map<String, Object> user = new HashMap<>();
-        user.put("name", name);
-        user.put("address", address);
-        user.put("mobileNumber", mobileNumber);
-        user.put("role", role);
-        user.put("username", username); // Consider using a more secure way to store user passwords or sensitive information
-
-        myRef.child(userId).setValue(user).addOnSuccessListener(aVoid -> {
-            Toast.makeText(SignUpPage.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-        }).addOnFailureListener(e -> {
-            Toast.makeText(SignUpPage.this, "Failed to register user", Toast.LENGTH_SHORT).show();
-        });
+            myRef.child(userId).setValue(user).addOnSuccessListener(aVoid -> {
+                Toast.makeText(SignUpPage.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(e -> {
+                Toast.makeText(SignUpPage.this, "Failed to register user", Toast.LENGTH_SHORT).show();
+            });
+        }else{
+            Toast.makeText(SignUpPage.this, "Authentication failed. User not signed in.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

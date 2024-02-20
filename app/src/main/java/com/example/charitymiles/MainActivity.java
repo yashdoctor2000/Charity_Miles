@@ -59,13 +59,40 @@ public class MainActivity extends Activity {
                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
-                                    Toast.makeText(getApplicationContext(), "Login success", Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getApplicationContext(), "Login success", Toast.LENGTH_LONG).show();
+                                    FirebaseUser fuser = mAuth.getCurrentUser();
+                                    if(fuser != null){
+                                        String uid = fuser.getUid();
+                                        usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                String role = snapshot.child("role").getValue(String.class);
+                                                if (role.equals("Donor")){
+                                                    //Toast.makeText(getApplicationContext(),"Redirect to Donor",Toast.LENGTH_LONG).show();
+                                                    Intent intent = new Intent(MainActivity.this, DonorHomePage.class);
+                                                    startActivity(intent);
+                                                } else if (role.equals("Receiver")) {
+                                                    Toast.makeText(getApplicationContext(),"Redirect to Receiver",Toast.LENGTH_LONG).show();
+                                                }
+                                                else{
+                                                    Toast.makeText(getApplicationContext(),"Can't get value: "+role,Toast.LENGTH_LONG).show();
+                                                }
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                Toast.makeText(getApplicationContext(),"Database Error"+error,Toast.LENGTH_LONG).show();
+
+                                            }
+                                        });
+                                    }
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getApplicationContext(), ""+e, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();
                                 }
                             });
                 } else {
