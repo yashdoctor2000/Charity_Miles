@@ -90,26 +90,26 @@ public class SignUpPage extends AppCompatActivity {
 
     private boolean validateForm(String name, String address, String mobileNumber, String username, String password, String role){
         if (name.isEmpty() || address.isEmpty() || mobileNumber.isEmpty() || password.isEmpty() || role.isEmpty() || username.isEmpty()) {
-                    // If any field is empty, show a toast message
-                    Toast.makeText(SignUpPage.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-                else if(!username.contains("@") || !username.endsWith(".com")){
-                    usernameEditText.setError("Username must be an email ending with @email.com");
-                    return false;
-                }
-                else if(password.length() < 6){
-                    passwordEditText.setError("Password must be at least 6 characters");
-                    return false;
-                }
-                else if(mobileNumber.length() != 10){
-                    mobileNumberEditText.setError("Mobile number must be exactly 10 digits long");
-                    return false;
-                }
-                else {
-                    // All fields are filled, proceed to save the data to Firebase Realtime Database
-                    return true;
-                }
+            // If any field is empty, show a toast message
+            Toast.makeText(SignUpPage.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(!username.contains("@") || !username.endsWith(".com")){
+            usernameEditText.setError("Username must be an email ending with @email.com");
+            return false;
+        }
+        else if(password.length() < 6){
+            passwordEditText.setError("Password must be at least 6 characters");
+            return false;
+        }
+        else if(mobileNumber.length() != 10){
+            mobileNumberEditText.setError("Mobile number must be exactly 10 digits long");
+            return false;
+        }
+        else {
+            // All fields are filled, proceed to save the data to Firebase Realtime Database
+            return true;
+        }
 
     }
 
@@ -148,22 +148,25 @@ public class SignUpPage extends AppCompatActivity {
 
     private void saveUserData(String name, String address, String mobileNumber, String password, String role, String username) {
         // Creating a unique ID for each user (or you can use the mobile number if it's unique)
+        FirebaseUser fuser = mAuth.getCurrentUser();
+        if(fuser !=null) {
+            String userId = fuser.getUid();
+            Map<String, Object> user = new HashMap<>();
+            user.put("name", name);
+            user.put("address", address);
+            user.put("mobileNumber", mobileNumber);
+            user.put("role", role);
+            user.put("username", username); // Consider using a more secure way to store user passwords or sensitive information
 
-
-        String userId = myRef.push().getKey();
-        Map<String, Object> user = new HashMap<>();
-        user.put("name", name);
-        user.put("address", address);
-        user.put("mobileNumber", mobileNumber);
-        user.put("role", role);
-        user.put("username", username); // Consider using a more secure way to store user passwords or sensitive information
-
-        myRef.child(userId).setValue(user).addOnSuccessListener(aVoid -> {
-            Toast.makeText(SignUpPage.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SignUpPage.this, MainActivity.class);
-            startActivity(intent);
-        }).addOnFailureListener(e -> {
-            Toast.makeText(SignUpPage.this, "Failed to register user", Toast.LENGTH_SHORT).show();
-        });
+            myRef.child(userId).setValue(user).addOnSuccessListener(aVoid -> {
+                Toast.makeText(SignUpPage.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SignUpPage.this, MainActivity.class);
+                startActivity(intent);
+            }).addOnFailureListener(e -> {
+                Toast.makeText(SignUpPage.this, "Failed to register user", Toast.LENGTH_SHORT).show();
+            });
+        }else{
+            Toast.makeText(SignUpPage.this, "Authentication failed. User not signed in.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
