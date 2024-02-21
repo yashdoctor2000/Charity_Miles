@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CharityMiles"
         tools:targetApi="31">
         <activity
+            android:name=".ReceiverSignUpPage"
+            android:exported="false" />
+        <activity
             android:name=".DonorHomePage"
             android:exported="false" />
         <activity
