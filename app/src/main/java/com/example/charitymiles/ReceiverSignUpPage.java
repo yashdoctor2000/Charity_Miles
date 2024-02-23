@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,6 +34,16 @@ public class ReceiverSignUpPage extends AppCompatActivity {
         addPhotoButton = findViewById(R.id.addPhotoButton);
         submitReceiverInfoButton = findViewById(R.id.submitReceiverInfoButton);
 
+
+        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.donationTypeAutoComplete);
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.donation_types, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Apply the adapter to the AutoCompleteTextView
+        autoCompleteTextView.setAdapter(adapter);
         // Initialize photo addition logic
         addPhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,6 +12,22 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/icon"
+            android:contentDescription="top_image"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            app:startIconDrawable="@drawable/baseline_diversity_1_24" > <!-- Your phone icon drawable -->
+
+
         <EditText
             android:id="@+id/orgNameEditText"
             android:layout_width="match_parent"
@@ -19,12 +35,58 @@
             android:hint="Name of Organization"
             android:inputType="text"/>
 
-        <EditText
-            android:id="@+id/orgContactEditText"
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contact Number of Organization"
-            android:inputType="phone"/>
+            android:paddingTop="5dp"
+            app:startIconDrawable="@drawable/baseline_local_phone_24" > <!-- Your phone icon drawable -->
+
+            <EditText
+                android:id="@+id/orgContactEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contact Number of Organization"
+                android:inputType="phone"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/donationTypeDropdown"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingTop="5dp"-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"-->
+<!--            app:endIconMode="dropdown_menu"-->
+<!--            app:boxStrokeWidth="2dp"-->
+<!--            app:boxBackgroundColor="@android:color/transparent"-->
+<!--            app:startIconDrawable="@drawable/baseline_arrow_drop_down_24">-->
+
+<!--            <AutoCompleteTextView-->
+<!--                android:id="@+id/donationTypeAutoComplete"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Donation Type"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:inputType="none"/>-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+
+        <!--        <EditText-->
+<!--            android:id="@+id/orgContactEditText"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="Contact Number of Organization"-->
+<!--            android:inputType="phone"-->
+<!--            android:drawableStart="@drawable/baseline_local_phone_24" />-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            app:startIconDrawable="@drawable/baseline_description_24" > <!-- Your phone icon drawable -->
 
         <EditText
             android:id="@+id/orgDescriptionEditText"
@@ -33,12 +95,79 @@
             android:hint="Description"
             android:inputType="textMultiLine"
             android:minLines="3"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingTop="5dp"-->
+<!--            app:startIconDrawable="@drawable/baseline_image_24" > &lt;!&ndash; Your phone icon drawable &ndash;&gt;-->
+
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Add Photos (Min 3)"-->
+<!--                android:paddingTop="16dp"/>-->
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:alignItems="center"-->
+<!--            android:paddingTop="16dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/baseline_image_24" /> &lt;!&ndash; Replace with your actual drawable resource for the image icon &ndash;&gt;-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Add Photos (Min 3)"-->
+<!--                android:paddingStart="16dp" /> &lt;!&ndash; Adjust padding as needed to align text properly &ndash;&gt;-->
+
+<!--        </LinearLayout>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Photos (Min 3)"
-            android:paddingTop="16dp"/>
+            android:paddingTop="5dp"
+            app:startIconDrawable="@drawable/baseline_image_24">
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">-->
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addPhotosButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Photos (Min 3)"
+                android:enabled="false" /> <!-- Disabled for editing but clickable -->
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/donationTypeDropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            app:endIconMode="dropdown_menu"
+            app:boxStrokeWidth="2dp"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:startIconDrawable="@drawable/baseline_arrow_drop_down_24">
+
+            <AutoCompleteTextView
+                android:id="@+id/donationTypeAutoComplete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Donation Type"
+                android:background="@android:color/transparent"
+                android:inputType="none"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <LinearLayout
             android:id="@+id/photoContainer"
