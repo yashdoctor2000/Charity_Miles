@@ -5,58 +5,90 @@
     android:padding="16dp"
     tools:context=".SignUpPage">
 
-    <TextView
-        android:id="@+id/headingTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome to the world of charity"
-        android:textSize="24sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"/>
+    <ImageView
+        android:layout_width="150dp"
+        android:id="@+id/IconSignup"
+        android:layout_height="150dp"
+        android:src="@drawable/signup"
+        android:background="@drawable/rounded_border"
+        android:contentDescription="top_image"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"/>
 
-    <EditText
-        android:id="@+id/nameEditText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/headingTextView"
-        android:hint="Name"/>
+        android:layout_below="@id/IconSignup">
 
-    <EditText
-        android:id="@+id/addressEditText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addressInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/nameEditText"
-        android:hint="Address"/>
+        android:layout_below="@id/nameInputLayout">
 
-    <EditText
-        android:id="@+id/mobileNumberEditText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addressEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/mobileNumberInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/addressEditText"
-        android:hint="Mobile Number"
-        android:inputType="phone"/>
+        android:layout_below="@id/addressInputLayout">
 
-    <EditText
-        android:id="@+id/usernameEditText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mobileNumberEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mobile Number"
+            android:inputType="phone"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mobileNumberEditText"
-        android:hint="Username"
-        android:inputType="textEmailAddress"/>
+        android:layout_below="@id/mobileNumberInputLayout">
 
-    <EditText
-        android:id="@+id/passwordEditText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usernameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:inputType="textEmailAddress"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/usernameEditText"
-        android:hint="Password"
-        android:inputType="textPassword"/>
+        android:layout_below="@id/usernameInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
         android:id="@+id/roleRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/passwordEditText"
+        android:layout_below="@id/passwordInputLayout"
         android:orientation="horizontal"
         android:layout_marginTop="16dp">
 
