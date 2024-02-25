@@ -1,0 +1,14 @@
+<!-- res/drawable/image_border.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#FFFFFF"/> <!-- Background color of the border; use your desired color -->
+    <stroke
+        android:width="2dp"
+    android:color="#000000"/> <!-- Color of the border -->
+    <corners android:radius="10dp"/> <!-- Corner radius for rounded corners -->
+    <padding
+        android:left="2dp"
+        android:top="2dp"
+        android:right="2dp"
+        android:bottom="2dp"/> <!-- Optional: Padding inside the border -->
+</shape>

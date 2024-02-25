@@ -16,6 +16,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/icon"
+            android:background="@drawable/rounded_border"
             android:contentDescription="top_image"
             android:scaleType="centerCrop"
             android:layout_gravity="center_horizontal"/>
@@ -132,20 +133,20 @@
 
 <!--        </LinearLayout>-->
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            app:startIconDrawable="@drawable/baseline_image_24">
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">-->
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingTop="5dp"-->
+<!--            app:startIconDrawable="@drawable/baseline_image_24">-->
+<!--&lt;!&ndash;            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">&ndash;&gt;-->
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/addPhotosButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add Photos (Min 3)"
-                android:enabled="false" /> <!-- Disabled for editing but clickable -->
-        </com.google.android.material.textfield.TextInputLayout>
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/addPhotosButton"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Add Photos (Min 3)"-->
+<!--                android:enabled="false" /> &lt;!&ndash; Disabled for editing but clickable &ndash;&gt;-->
+<!--        </com.google.android.material.textfield.TextInputLayout>TextInputLayout-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/donationTypeDropdown"
@@ -163,10 +164,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Donation Type"
-                android:background="@android:color/transparent"
+                android:background="@drawable/border_background"
                 android:inputType="none"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            app:startIconDrawable="@drawable/baseline_image_24">
+            <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">-->
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addPhotosButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Photos (Min 3)"
+                android:enabled="false" /> <!-- Disabled for editing but clickable -->
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <LinearLayout
