@@ -39,7 +39,7 @@ import java.util.HashMap;
 
 
 public class ReceiverSignUpPage extends AppCompatActivity {
-    private EditText orgNameEditText, orgContactEditText, orgDescriptionEditText;
+    private EditText orgNameEditText, orgContactEditText, orgDescriptionEditText, orgAddress;
     private Button addPhotoButton, submitReceiverInfoButton;
     private ActivityResultLauncher<String> mGetContent;
     private static final int REQUEST_PERMISSION = 1; // This can be any integer unique to this request
@@ -61,10 +61,12 @@ public class ReceiverSignUpPage extends AppCompatActivity {
         orgContactEditText = findViewById(R.id.orgContactEditText);
         orgDescriptionEditText = findViewById(R.id.orgDescriptionEditText);
         addPhotoButton = findViewById(R.id.addPhotoButton);
+        orgAddress = findViewById(R.id.orgAddress);
         submitReceiverInfoButton = findViewById(R.id.submitReceiverInfoButton);
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         selectedImage = findViewById(R.id.selectedImage);
+
 
 
 
@@ -149,6 +151,7 @@ public class ReceiverSignUpPage extends AppCompatActivity {
         String orgName = orgNameEditText.getText().toString().trim();
         String orgContact = orgContactEditText.getText().toString().trim();
         String orgDescription = orgDescriptionEditText.getText().toString().trim();
+        String orgAdd = orgAddress.getText().toString().trim();
         AutoCompleteTextView donationTypeView = findViewById(R.id.donationTypeAutoComplete);
         String donationType = donationTypeView.getText().toString().trim(); // Get the selected donation type
 
@@ -159,7 +162,8 @@ public class ReceiverSignUpPage extends AppCompatActivity {
         userData.put("orgContact", orgContact);
         userData.put("orgDescription", orgDescription);
         userData.put("donationType", donationType); // Include the donation type in the map
-        userData.put("imageUrl", imageUrl); // Include the image URL in the map
+        userData.put("imageUrl", imageUrl);// Include the image URL in the map
+        userData.put("orgAddress",orgAdd);
 
         // Save the user data in the Realtime Database under the user's UID
         databaseReference.child(userId).updateChildren(userData)
