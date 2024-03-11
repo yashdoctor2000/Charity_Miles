@@ -60,6 +60,8 @@
         android:id="@+id/forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
         android:text="Forgot Password?"
         android:layout_below="@id/signup_button"
         android:layout_centerHorizontal="true"
