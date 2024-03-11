@@ -16,6 +16,9 @@
             android:name=".ReceiverSignUpPage"
             android:exported="false" />
         <activity
+            android:name=".forgetPassword"
+            android:exported="false" />
+        <activity
             android:name=".DonorHomePage"
             android:exported="false" />
         <activity
