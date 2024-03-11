@@ -12,6 +12,7 @@ import android.Manifest;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,11 +21,21 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.HashMap;
 
 
 public class ReceiverSignUpPage extends AppCompatActivity {
@@ -34,6 +45,10 @@ public class ReceiverSignUpPage extends AppCompatActivity {
     private static final int REQUEST_PERMISSION = 1; // This can be any integer unique to this request
 
     private FirebaseAuth mAuth;
+    private StorageReference storageReference;
+    private ImageView selectedImage;
+    private Uri imageUri;
+    private DatabaseReference databaseReference;
 
 
     @Override
@@ -47,6 +62,10 @@ public class ReceiverSignUpPage extends AppCompatActivity {
         orgDescriptionEditText = findViewById(R.id.orgDescriptionEditText);
         addPhotoButton = findViewById(R.id.addPhotoButton);
         submitReceiverInfoButton = findViewById(R.id.submitReceiverInfoButton);
+        storageReference = FirebaseStorage.getInstance().getReference("uploads");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        selectedImage = findViewById(R.id.selectedImage);
+
 
 
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.donationTypeAutoComplete);
@@ -66,8 +85,10 @@ public class ReceiverSignUpPage extends AppCompatActivity {
                 // Handle the returned Uri
                 if (uri != null) {
                     // Use the Uri to load the image. E.g., display in an ImageView or upload to your server
-                    // ImageView imageView = findViewById(R.id.your_image_view_id);
-                    // imageView.setImageURI(uri);
+                    selectedImage.setImageURI(uri);
+                    imageUri = uri;
+                    //ImageView imageView = findViewById(R.id.selectedImage);
+                    //imageView.setImageURI(uri);
                 }
             }
         });
@@ -89,12 +110,65 @@ public class ReceiverSignUpPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseUser user= mAuth.getCurrentUser();
-                String userId = user.getUid();
-                Toast.makeText(ReceiverSignUpPage.this,""+userId,Toast.LENGTH_LONG).show();
+                //String userId = user.getUid();
+                //Toast.makeText(ReceiverSignUpPage.this,""+userId,Toast.LENGTH_LONG).show();
+                if (imageUri != null){
+                    uploadImageToFirebase(user.getUid());
+                }
+                else{
+                    Toast.makeText(ReceiverSignUpPage.this, "Please select an image and make sure you're logged in.", Toast.LENGTH_LONG).show();
+                }
                 // Implement your submission logic here
                 // This might involve validating input fields, uploading photos, and saving data to Firebase
             }
         });
+    }
+
+    private void uploadImageToFirebase(String userId) {
+        StorageReference fileReference = storageReference.child(userId + "/" + System.currentTimeMillis() + ".jpg");
+        fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String imageUrl = uri.toString();
+                        saveUserData(userId, imageUrl);
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ReceiverSignUpPage.this, "Failed to upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void saveUserData(String userId, String imageUrl) {
+        String orgName = orgNameEditText.getText().toString().trim();
+        String orgContact = orgContactEditText.getText().toString().trim();
+        String orgDescription = orgDescriptionEditText.getText().toString().trim();
+        AutoCompleteTextView donationTypeView = findViewById(R.id.donationTypeAutoComplete);
+        String donationType = donationTypeView.getText().toString().trim(); // Get the selected donation type
+
+
+        // Create a HashMap to store user data
+        HashMap<String, Object> userData = new HashMap<>();
+        userData.put("orgName", orgName);
+        userData.put("orgContact", orgContact);
+        userData.put("orgDescription", orgDescription);
+        userData.put("donationType", donationType); // Include the donation type in the map
+        userData.put("imageUrl", imageUrl); // Include the image URL in the map
+
+        // Save the user data in the Realtime Database under the user's UID
+        databaseReference.child(userId).updateChildren(userData)
+                .addOnSuccessListener(aVoid ->
+                        Toast.makeText(ReceiverSignUpPage.this, "User data saved successfully", Toast.LENGTH_LONG).show()
+                )
+                .addOnFailureListener(e ->
+                        Toast.makeText(ReceiverSignUpPage.this, "Failed to save user data: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );
     }
 
 
