@@ -6,21 +6,34 @@
     tools:context=".SignUpPage">
 
     <ImageView
-        android:layout_width="150dp"
+        android:layout_width="120dp"
         android:id="@+id/IconSignup"
-        android:layout_height="150dp"
-        android:src="@drawable/signup"
+        android:layout_height="120dp"
+        android:src="@drawable/signup_icon"
         android:background="@drawable/rounded_border"
         android:contentDescription="top_image"
         android:scaleType="centerCrop"
         android:layout_gravity="center_horizontal"
         android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/IconSignup"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/bebas"
+        android:text="Sign up"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nameInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/IconSignup">
+        android:layout_below="@id/textView4">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nameEditText"
