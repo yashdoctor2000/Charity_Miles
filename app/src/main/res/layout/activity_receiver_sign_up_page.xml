@@ -214,13 +214,28 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/submitReceiverInfoButton"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit"
-            android:backgroundTint="@color/black"
-            android:layout_marginTop="24dp"/>
+            android:layout_marginTop="0dp">
+
+            <ProgressBar
+                android:id="@+id/receiverSignUpProgressbar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/submitReceiverInfoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:text="Submit"
+                android:backgroundTint="@color/black"/>
+        </FrameLayout>
     </LinearLayout>
 
 </ScrollView>
