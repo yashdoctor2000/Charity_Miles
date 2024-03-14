@@ -33,6 +33,7 @@
             android:id="@+id/orgNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaa"
             android:hint="Name of Organization"
             android:inputType="text"/>
 
@@ -49,6 +50,7 @@
                 android:id="@+id/orgContactEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa"
                 android:hint="Contact Number of Organization"
                 android:inputType="phone"/>
 
@@ -64,6 +66,7 @@
                 android:id="@+id/orgAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa"
                 android:hint="Address"
                 android:inputType="text"/>
 
@@ -109,6 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Description"
+            android:fontFamily="@font/comfortaa"
             android:inputType="textMultiLine"
             android:minLines="3"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -179,6 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Donation Type"
+                android:fontFamily="@font/comfortaa"
                 android:background="@drawable/border_background"
                 android:inputType="none"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -204,16 +209,33 @@
                 android:id="@+id/addPhotoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
                 android:text="Add Photo"/>
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/submitReceiverInfoButton"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit"
-            android:layout_marginTop="24dp"/>
+            android:layout_marginTop="0dp">
+
+            <ProgressBar
+                android:id="@+id/receiverSignUpProgressbar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/submitReceiverInfoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:text="Submit"
+                android:backgroundTint="@color/black"/>
+        </FrameLayout>
     </LinearLayout>
 
 </ScrollView>

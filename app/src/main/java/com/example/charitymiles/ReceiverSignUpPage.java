@@ -22,6 +22,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -47,6 +48,7 @@ public class ReceiverSignUpPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private StorageReference storageReference;
     private ImageView selectedImage;
+    private ProgressBar progressBar;
     private Uri imageUri;
     private DatabaseReference databaseReference;
 
@@ -66,6 +68,7 @@ public class ReceiverSignUpPage extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         selectedImage = findViewById(R.id.selectedImage);
+        progressBar = findViewById(R.id.receiverSignUpProgressbar);
 
 
 
@@ -115,6 +118,8 @@ public class ReceiverSignUpPage extends AppCompatActivity {
                 //String userId = user.getUid();
                 //Toast.makeText(ReceiverSignUpPage.this,""+userId,Toast.LENGTH_LONG).show();
                 if (imageUri != null){
+                    progressBar.setVisibility(View.VISIBLE);
+                    submitReceiverInfoButton.setVisibility(View.INVISIBLE);
                     uploadImageToFirebase(user.getUid());
                 }
                 else{
@@ -143,6 +148,8 @@ public class ReceiverSignUpPage extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(ReceiverSignUpPage.this, "Failed to upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.INVISIBLE);
+                submitReceiverInfoButton.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -167,11 +174,21 @@ public class ReceiverSignUpPage extends AppCompatActivity {
 
         // Save the user data in the Realtime Database under the user's UID
         databaseReference.child(userId).updateChildren(userData)
-                .addOnSuccessListener(aVoid ->
-                        Toast.makeText(ReceiverSignUpPage.this, "User data saved successfully", Toast.LENGTH_LONG).show()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                          @Override
+                                          public void onSuccess(Void unused) {
+                                              Toast.makeText(ReceiverSignUpPage.this, "User data saved successfully", Toast.LENGTH_LONG).show();
+                                          }
+                                      }
                 )
-                .addOnFailureListener(e ->
-                        Toast.makeText(ReceiverSignUpPage.this, "Failed to save user data: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                .addOnFailureListener(new OnFailureListener() {
+                                          @Override
+                                          public void onFailure(@NonNull Exception e) {
+                                              Toast.makeText(ReceiverSignUpPage.this, "Failed to save user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                              progressBar.setVisibility(View.INVISIBLE);
+                                              submitReceiverInfoButton.setVisibility(View.VISIBLE);
+                                          }
+                                      }
                 );
     }
 
@@ -186,6 +203,8 @@ public class ReceiverSignUpPage extends AppCompatActivity {
             } else {
                 // Permission was denied. Handle the error.
                 Toast.makeText(this, "Permission denied to read external storage", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.INVISIBLE);
+                submitReceiverInfoButton.setVisibility(View.VISIBLE);
             }
         }
     }
