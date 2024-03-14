@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DonorHomePage extends AppCompatActivity {
-    private Spinner spinnerDonationTypes;
+    private AutoCompleteTextView spinnerDonationTypes;
     private RecyclerView recyclerViewOrganizations;
     private OrganizationAdapter organizationAdapter;
     private DatabaseReference databaseReference;
@@ -58,19 +59,15 @@ public class DonorHomePage extends AppCompatActivity {
                 R.array.donation_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDonationTypes.setAdapter(adapter);
-        spinnerDonationTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerDonationTypes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // Get the selected donation type from the spinner
-                String selectedDonationType = parentView.getItemAtPosition(position).toString();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedDonationType = parent.getItemAtPosition(position).toString();
                 // Load organizations based on the selected donation type
                 loadOrganizations(selectedDonationType);
+
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // Interface callback
-            }
         });
     }
 

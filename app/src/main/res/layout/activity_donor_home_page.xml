@@ -8,13 +8,33 @@
     tools:context=".DonorHomePage">
 
     <!-- Spinner for selecting the donation type -->
-    <Spinner
-        android:id="@+id/spinnerDonationTypes"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/donationTypeDropdown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp" />
+        android:paddingTop="5dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        app:endIconMode="dropdown_menu"
+        app:boxStrokeWidth="2dp"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:startIconDrawable="@drawable/baseline_arrow_drop_down_24">
+
+        <AutoCompleteTextView
+            android:id="@+id/spinnerDonationTypes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Donation Type"
+            android:background="@drawable/border_background"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinnerDonationTypes"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginEnd="16dp" />-->
 
     <!-- RecyclerView for displaying the list of organizations -->
     <androidx.recyclerview.widget.RecyclerView
