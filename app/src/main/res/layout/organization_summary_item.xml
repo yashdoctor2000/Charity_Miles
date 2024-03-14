@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="@drawable/border_background">
 
     <ImageView
         android:id="@+id/imageViewOrganizationPhoto"
@@ -20,6 +21,8 @@
         android:layout_marginStart="16dp"
         android:textSize="18sp"
         android:text="Organization Name"
-    />
+        android:backgroundTint="@color/yellow"
+        android:textStyle="bold"
+        android:fontFamily="@font/comfortaa"/>
 
 </LinearLayout>
