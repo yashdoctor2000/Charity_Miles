@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -82,6 +83,10 @@ public class DonorHomePage extends AppCompatActivity {
                     String type = snapshot.child("donationType").getValue(String.class);
                     if ("Receiver".equals(role) && donationType.equals(type)) {
                         OrganizationModel organization = snapshot.getValue(OrganizationModel.class);
+                        if (organization != null) {
+                            // Set the key (UID) of the organization data
+                            organization.setUid(snapshot.getKey());
+                        }
                         organizations.add(organization);
                     }
                 }
@@ -135,6 +140,19 @@ public class DonorHomePage extends AppCompatActivity {
                 super(itemView);
                 textViewOrganizationName = itemView.findViewById(R.id.textViewOrganizationName);
                 imageViewOrganizationPhoto = itemView.findViewById(R.id.imageViewOrganizationPhoto);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = getBindingAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            OrganizationModel selectedOrganization = organizations.get(position);
+                            Intent detailIntent = new Intent(context, OrganizationDetailActivity.class);
+                            detailIntent.putExtra("OrganizationDetail", selectedOrganization);
+                            context.startActivity(detailIntent);
+                        }
+                    }
+                });
             }
         }
 
