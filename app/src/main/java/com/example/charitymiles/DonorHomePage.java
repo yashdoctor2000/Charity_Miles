@@ -115,7 +115,7 @@ public class DonorHomePage extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             OrganizationModel organization = organizations.get(position);
-            holder.textViewOrganizationName.setText(organization.getName());
+            holder.textViewOrganizationName.setText(organization.getorgName());
             Glide.with(context).load(organization.getimageUrl()).into(holder.imageViewOrganizationPhoto);
         }
 

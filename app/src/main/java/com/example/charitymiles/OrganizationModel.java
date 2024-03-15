@@ -1,8 +1,10 @@
 package com.example.charitymiles;
 
-public class OrganizationModel {
+import java.io.Serializable;
+
+public class OrganizationModel implements Serializable {
     private String id;
-    private String name;
+    private String orgName;
     private String imageUrl; // URL to the organization's photo
     private String donationType;
 
@@ -11,9 +13,9 @@ public class OrganizationModel {
     }
 
     // Constructor with parameters
-    public OrganizationModel(String id, String name, String imageUrl, String donationType) {
+    public OrganizationModel(String id, String orgName, String imageUrl, String donationType) {
         this.id = id;
-        this.name = name;
+        this.orgName = orgName;
         this.imageUrl = imageUrl;
         this.donationType = donationType;
     }
@@ -21,8 +23,8 @@ public class OrganizationModel {
     // Getters and Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getorgName() { return orgName; }
+    public void setName(String orgName) { this.orgName = orgName; }
     public String getimageUrl() { return imageUrl; }
     public void setimageUrl(String imageUrl) { this.imageUrl = imageUrl; }
     public String getDonationType() { return donationType; }
