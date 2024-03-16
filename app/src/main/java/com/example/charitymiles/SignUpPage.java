@@ -160,7 +160,13 @@ public class SignUpPage extends AppCompatActivity {
 
             myRef.child(userId).setValue(user).addOnSuccessListener(aVoid -> {
                 Toast.makeText(SignUpPage.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SignUpPage.this, MainActivity.class);
+                Intent intent;
+                if(role.equals("Donor")) {
+                    intent = new Intent(SignUpPage.this, MainActivity.class);
+                }
+                else{
+                    intent = new Intent(SignUpPage.this, ReceiverSignUpPage.class);
+                }
                 startActivity(intent);
             }).addOnFailureListener(e -> {
                 Toast.makeText(SignUpPage.this, "Failed to register user", Toast.LENGTH_SHORT).show();

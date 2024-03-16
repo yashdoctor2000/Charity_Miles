@@ -115,6 +115,14 @@ public class MainActivity extends Activity {
             }
         });
 
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(MainActivity.this, forgetPassword.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 }
