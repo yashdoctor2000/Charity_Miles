@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -17,6 +16,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class DonorHomePage extends AppCompatActivity {
+    private DatabaseReference mDatabase;
+    private TextView organizationNameTextView;
+    private TextView organizationCategoryTextView;
+    private TextView organizationDescriptionTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -43,35 +43,48 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- TextView to display organization's name -->
-            <TextView
-                android:id="@+id/organizationNameTextView"
-                android:layout_width="wrap_content"
+            <!-- CardView to display organization's details -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/organizationCard"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Organization Name"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"/>
+                android:layout_margin="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
 
-            <!-- TextView to display organization's category -->
-            <TextView
-                android:id="@+id/organizationCategoryTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Organization Category"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-            <!-- TextView to display organization's description -->
-            <TextView
-                android:id="@+id/organizationDescriptionTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Organization Description"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"/>
+                    <!-- TextView to display organization's name -->
+                    <TextView
+                        android:id="@+id/organizationNameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Organization Name"/>
+
+                    <!-- TextView to display organization's category -->
+                    <TextView
+                        android:id="@+id/organizationCategoryTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Organization Category"
+                        android:layout_marginTop="8dp"/>
+
+                    <!-- TextView to display organization's description -->
+                    <TextView
+                        android:id="@+id/organizationDescriptionTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Organization Description"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
     </ScrollView>
