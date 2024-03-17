@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:padding="8dp"
     android:background="@drawable/border"
-    android:backgroundTint="@color/yellow">
+    android:backgroundTint="#e8f1f9">
 
     <ImageView
         android:id="@+id/imageViewOrganizationPhoto"
