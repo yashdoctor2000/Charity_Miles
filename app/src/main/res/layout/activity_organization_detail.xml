@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
+    tools:context=".OrganizationDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imageViewDetailPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background" /> <!-- Placeholder image -->
+
+        <TextView
+            android:id="@+id/textViewDetailDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="ID"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/textViewUid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Description"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewDetailContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Contact Number"
+            android:textSize="16sp"
+            android:textColor="@color/teal_200"
+            android:drawableStart="@android:drawable/ic_dialog_dialer"
+            android:drawablePadding="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:autoLink="phone" />
+
+        <TextView
+            android:id="@+id/textViewDetailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Address"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/buttonRequestPickup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Request Pickup" />
+
+    </LinearLayout>
+</ScrollView>
