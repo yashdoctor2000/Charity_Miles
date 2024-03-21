@@ -40,7 +40,7 @@ import java.util.HashMap;
 
 
 public class ReceiverSignUpPage extends AppCompatActivity {
-    private EditText orgNameEditText, orgContactEditText, orgDescriptionEditText, orgAddress;
+    private EditText orgNameEditText, orgContactEditText, orgDescriptionEditText, orgAddress, orgTagLine;
     private Button addPhotoButton, submitReceiverInfoButton;
     private ActivityResultLauncher<String> mGetContent;
     private static final int REQUEST_PERMISSION = 1; // This can be any integer unique to this request
@@ -49,6 +49,7 @@ public class ReceiverSignUpPage extends AppCompatActivity {
     private StorageReference storageReference;
     private ImageView selectedImage;
     private ProgressBar progressBar;
+    private AutoCompleteTextView donationType;
     private Uri imageUri;
     private DatabaseReference databaseReference;
 
@@ -64,12 +65,13 @@ public class ReceiverSignUpPage extends AppCompatActivity {
         orgDescriptionEditText = findViewById(R.id.orgDescriptionEditText);
         addPhotoButton = findViewById(R.id.addPhotoButton);
         orgAddress = findViewById(R.id.orgAddress);
+        donationType = findViewById(R.id.donationTypeAutoComplete);
         submitReceiverInfoButton = findViewById(R.id.submitReceiverInfoButton);
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         selectedImage = findViewById(R.id.selectedImage);
         progressBar = findViewById(R.id.receiverSignUpProgressbar);
-
+        orgTagLine = findViewById(R.id.orgTagLine);
 
 
 
@@ -115,15 +117,28 @@ public class ReceiverSignUpPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseUser user= mAuth.getCurrentUser();
+                final String orgName = orgNameEditText.getText().toString().trim();
+                final String orgAdress = orgAddress.getText().toString().trim();
+                final String orgContact = orgContactEditText.getText().toString().trim();
+                final String orgDescription = orgDescriptionEditText.getText().toString().trim();
+                final String orgTag = orgTagLine.getText().toString().trim();
+                //String dtype = donationType.getText().toString().trim();
                 //String userId = user.getUid();
                 //Toast.makeText(ReceiverSignUpPage.this,""+userId,Toast.LENGTH_LONG).show();
-                if (imageUri != null){
-                    progressBar.setVisibility(View.VISIBLE);
-                    submitReceiverInfoButton.setVisibility(View.INVISIBLE);
-                    uploadImageToFirebase(user.getUid());
+                if (imageUri != null)
+                {
+                    if (orgName.isEmpty() || orgAdress.isEmpty() || orgContact.isEmpty() || orgTag.isEmpty() || orgAdress.isEmpty() || orgDescription.isEmpty())
+                    {
+                        Toast.makeText(ReceiverSignUpPage.this, "Please fill all the details.", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        uploadImageToFirebase(user.getUid());
+                        progressBar.setVisibility(View.VISIBLE);
+                        submitReceiverInfoButton.setVisibility(View.INVISIBLE);
+                    }
                 }
                 else{
-                    Toast.makeText(ReceiverSignUpPage.this, "Please select an image and make sure you're logged in.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ReceiverSignUpPage.this, "Please select an image.", Toast.LENGTH_LONG).show();
                 }
                 // Implement your submission logic here
                 // This might involve validating input fields, uploading photos, and saving data to Firebase
@@ -159,6 +174,7 @@ public class ReceiverSignUpPage extends AppCompatActivity {
         String orgContact = orgContactEditText.getText().toString().trim();
         String orgDescription = orgDescriptionEditText.getText().toString().trim();
         String orgAdd = orgAddress.getText().toString().trim();
+        String orgtagline = orgTagLine.getText().toString().trim();
         AutoCompleteTextView donationTypeView = findViewById(R.id.donationTypeAutoComplete);
         String donationType = donationTypeView.getText().toString().trim(); // Get the selected donation type
 
@@ -171,6 +187,7 @@ public class ReceiverSignUpPage extends AppCompatActivity {
         userData.put("donationType", donationType); // Include the donation type in the map
         userData.put("imageUrl", imageUrl);// Include the image URL in the map
         userData.put("orgAddress",orgAdd);
+        userData.put("orgTagline",orgtagline);
 
         // Save the user data in the Realtime Database under the user's UID
         databaseReference.child(userId).updateChildren(userData)
@@ -178,6 +195,8 @@ public class ReceiverSignUpPage extends AppCompatActivity {
                                           @Override
                                           public void onSuccess(Void unused) {
                                               Toast.makeText(ReceiverSignUpPage.this, "User data saved successfully", Toast.LENGTH_LONG).show();
+                                              Intent intent = new Intent(ReceiverSignUpPage.this,MainActivity.class);
+                                              startActivity(intent);
                                           }
                                       }
                 )

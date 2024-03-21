@@ -60,6 +60,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
+            app:startIconDrawable="@drawable/baseline_tag_24" > <!-- Your phone icon drawable -->
+
+            <EditText
+                android:id="@+id/orgTagLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa"
+                android:hint="Tag Line"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
             app:startIconDrawable="@drawable/baseline_add_location_24" > <!-- Your phone icon drawable -->
 
             <EditText
