@@ -121,6 +121,7 @@ public class DonorHomePage extends AppCompatActivity {
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             OrganizationModel organization = organizations.get(position);
             holder.textViewOrganizationName.setText(organization.getorgName());
+            holder.textViewOrganizationVision.setText(organization.getorgVision());
             Glide.with(context).load(organization.getimageUrl()).into(holder.imageViewOrganizationPhoto);
         }
 
@@ -134,12 +135,14 @@ public class DonorHomePage extends AppCompatActivity {
         }
         public class ViewHolder extends RecyclerView.ViewHolder {
             TextView textViewOrganizationName;
+            TextView textViewOrganizationVision;
             ImageView imageViewOrganizationPhoto;
 
             ViewHolder(View itemView) {
                 super(itemView);
                 textViewOrganizationName = itemView.findViewById(R.id.textViewOrganizationName);
                 imageViewOrganizationPhoto = itemView.findViewById(R.id.imageViewOrganizationPhoto);
+                textViewOrganizationVision = itemView.findViewById(R.id.textViewOrganizationVision);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
