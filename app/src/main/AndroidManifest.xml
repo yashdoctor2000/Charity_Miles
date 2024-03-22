@@ -15,6 +15,9 @@
         android:theme="@style/Theme.CharityMiles"
         tools:targetApi="31">
         <activity
+            android:name=".PickUpRequest"
+            android:exported="false" />
+        <activity
             android:name=".OrganizationDetailActivity"
             android:exported="false" />
         <activity
