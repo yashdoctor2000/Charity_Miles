@@ -10,7 +10,7 @@ public class OrganizationModel implements Serializable {
     private String address;
     private String orgDescription;
     private String orgContact;
-    private String orgVision;
+    private String orgTagline;
 
 
     // Default constructor required for calls to DataSnapshot.getValue(OrganizationModel.class)
@@ -18,7 +18,7 @@ public class OrganizationModel implements Serializable {
     }
 
     // Constructor with parameters
-    public OrganizationModel(String Uid, String orgName, String imageUrl, String donationType, String address, String orgDescription, String orgContact, String orgVision) {
+    public OrganizationModel(String Uid, String orgName, String imageUrl, String donationType, String address, String orgDescription, String orgContact, String orgTagline) {
         this.Uid = Uid;
         this.orgName = orgName;
         this.imageUrl = imageUrl;
@@ -26,7 +26,7 @@ public class OrganizationModel implements Serializable {
         this.address = address;
         this.orgDescription = orgDescription;
         this.orgContact = orgContact;
-        this.orgVision = orgVision;
+        this.orgTagline = orgTagline;
     }
 
     // Getters and Setters
@@ -44,7 +44,6 @@ public class OrganizationModel implements Serializable {
     public void setOrgDescription(String orgDescription){this.orgDescription=orgDescription;}
     public String getOrgContact(){return orgContact;}
     public void setOrgContact(String orgContact){ this.orgContact = orgContact;}
-
-    public String getorgVision() { return orgVision; }
-    public void setOrgVision(String orgVision) { this.orgVision = orgVision; }
+    public String getorgTagline() { return orgTagline; }
+    public void setorgTagline(String orgTagline) { this.orgTagline = orgTagline; }
 }
