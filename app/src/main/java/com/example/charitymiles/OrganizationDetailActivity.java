@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,6 +42,15 @@ public class OrganizationDetailActivity extends AppCompatActivity {
 
 // Assuming you're using Glide for image loading
         Glide.with(this).load(organization.getimageUrl()).into(imageViewDetailPhoto);
+
+        buttonRequestPickup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OrganizationDetailActivity.this, PickUpRequest.class);
+                intent.putExtra("OrganizationForPickup",organization);
+                startActivity(intent);
+            }
+        });
 
     }
 }
