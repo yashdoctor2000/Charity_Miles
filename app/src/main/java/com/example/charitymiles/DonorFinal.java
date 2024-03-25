@@ -35,8 +35,8 @@ public class DonorFinal extends AppCompatActivity {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             String currentUserUID = currentUser.getUid(); // This is the user's UID
-            //DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserUID);
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference userRef = databaseReference.child("Users").child(currentUserUID);
 
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
