@@ -87,7 +87,12 @@ public class DonorHomePage extends AppCompatActivity {
                 } else if (id == R.id.nav_about_us) {
                     // Handle about-us selection
                 } else if (id == R.id.nav_sign_out) {
-                    // Handle sign-out
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent(DonorHomePage.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                    return true;
                 }
 
                 // Close the drawer after action
@@ -104,12 +109,6 @@ public class DonorHomePage extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu, menu); // Ensure this matches your menu file's name
-//        return true;
-//    }
 
     private void setupRecyclerView() {
         recyclerViewOrganizations.setLayoutManager(new LinearLayoutManager(this));
