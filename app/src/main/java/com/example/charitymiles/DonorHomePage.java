@@ -121,6 +121,13 @@ public class DonorHomePage extends AppCompatActivity {
                 R.array.donation_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDonationTypes.setAdapter(adapter);
+
+        // Set the AutoCompleteTextView to show the first item as default
+        if (adapter.getCount() > 0) {
+            String defaultValue = adapter.getItem(0).toString();
+            spinnerDonationTypes.setText(defaultValue, false); // Prevents the dropdown from showing
+            loadOrganizations(defaultValue); // Load organizations based on the default donation type
+        }
         spinnerDonationTypes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
