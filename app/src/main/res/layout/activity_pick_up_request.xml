@@ -11,6 +11,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <EditText
+            android:id="@+id/editableTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:cursorVisible="false"
+            android:inputType="none"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:focusable="false"
+            android:clickable="true" />
+
+
         <TextView
             android:id="@+id/tvPickupRequestFormHeading"
             android:layout_width="wrap_content"
@@ -23,8 +37,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp" />
 
-        <EditText
-            android:id="@+id/etOrganizationName"
+        <TextView
+            android:id="@+id/tvOrganizationName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Organization Name"
@@ -38,85 +52,127 @@
             android:paddingTop="8dp" />
 
 
-        <EditText
-            android:id="@+id/etOrganizationDetails"
+        <TextView
+            android:id="@+id/tvOrganizationDetails"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Organization Phone Number"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@+id/etOrganizationName"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrganizationName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp" />
 
 
-        <EditText
-            android:id="@+id/etDonationItem"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDonationItem"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="What items you want to donate?"
-            app:layout_constraintTop_toBottomOf="@+id/etOrganizationDetails"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrganizationDetails"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp">
 
-        <EditText
-            android:id="@+id/etDonationQuantity"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDonationItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="What items you want to donate?" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDonationQuantity"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="How many items you want to donate?"
-            android:inputType="number"
-            app:layout_constraintTop_toBottomOf="@+id/etDonationItem"
+            app:layout_constraintTop_toBottomOf="@+id/tilDonationItem"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp">
 
-        <EditText
-            android:id="@+id/etAddress"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDonationQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="How many items you want to donate?"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAddress"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Address(Street, Apt, ZIP)"
-            app:layout_constraintTop_toBottomOf="@+id/etDonationQuantity"
+            app:layout_constraintTop_toBottomOf="@+id/tilDonationQuantity"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp">
 
-        <EditText
-            android:id="@+id/etPreferredDate"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address(Street, Apt, ZIP)" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPreferredDate"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Enter Preferred Date (YYYY-MM-DD)"
-            android:inputType="date"
-            android:digits="0123456789-"
-            app:layout_constraintTop_toBottomOf="@+id/etAddress"
+            app:layout_constraintTop_toBottomOf="@+id/tilAddress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPreferredDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Preferred Date(MM-DD-YYYY)"
+                android:inputType="date"
+                android:digits="0123456789-" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-        <EditText
-            android:id="@+id/etPreferredTime"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPreferredTime"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Enter Preferred Time (HH:MM)"
-            android:inputType="text"
-            android:digits="0123456789:"
-            app:layout_constraintTop_toBottomOf="@+id/etPreferredDate"
+            app:layout_constraintTop_toBottomOf="@+id/tilPreferredDate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPreferredTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Preferred Time(HH:MM)"
+                android:inputType="time"
+                android:digits="0123456789:" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-        <EditText
-            android:id="@+id/etAdditionalInformation"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAdditionalInformation"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Additional Information"
-            app:layout_constraintTop_toBottomOf="@+id/etPreferredTime"
+            app:layout_constraintTop_toBottomOf="@+id/tilPreferredTime"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAdditionalInformation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Additional Information" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <Button
@@ -125,7 +181,7 @@
             android:layout_height="wrap_content"
             android:text="Schedule Pickup"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/etAdditionalInformation"
+            app:layout_constraintTop_toBottomOf="@+id/tilAdditionalInformation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp" />
