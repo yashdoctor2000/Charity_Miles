@@ -51,7 +51,8 @@
                 android:id="@+id/etOrganizationName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="What items you want to donate?" />
+                android:inputType="none"
+                android:hint="Organization Name"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -59,7 +60,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/tvPickupRequestFormHeading"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrganizationName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp">
@@ -68,7 +69,8 @@
                 android:id="@+id/etOrganizationDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="What items you want to donate?" />
+                android:inputType="none"
+                android:hint="Organization Contact Number" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
