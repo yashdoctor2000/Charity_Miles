@@ -72,7 +72,7 @@ public class PickUpRequest extends AppCompatActivity {
                     donation.put("OrgId",OrgId);
                     donation.put("DonorId",DonorId);
 
-                    myRef.setValue(donation).addOnSuccessListener(aVoid ->{
+                    myRef.push().setValue(donation).addOnSuccessListener(aVoid ->{
                         Toast.makeText(PickUpRequest.this, "UDonation Requested", Toast.LENGTH_SHORT).show();
 
                     }).addOnFailureListener(aVoid ->{
