@@ -7,131 +7,128 @@
     android:padding="16dp"
     tools:context=".PickUpRequest">
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvPickupRequestFormHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick Up Request Form"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
 
-            <TextView
-                android:id="@+id/tvPickupRequestFormHeading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pick Up Request Form"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp" />
-
-            <EditText
-                android:id="@+id/etOrganizationName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Organization Name"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@+id/tvPickupRequestFormHeading"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:paddingTop="8dp" />
+        <EditText
+            android:id="@+id/etOrganizationName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Organization Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/tvPickupRequestFormHeading"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:paddingTop="8dp" />
 
 
-            <EditText
-                android:id="@+id/etOrganizationDetails"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Organization Phone Number"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:gravity="center"
-                app:layout_constraintTop_toBottomOf="@+id/etOrganizationName"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" />
+        <EditText
+            android:id="@+id/etOrganizationDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Organization Phone Number"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/etOrganizationName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
 
 
-            <EditText
-                android:id="@+id/etDonationItem"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="What items you want to donate?"
-                app:layout_constraintTop_toBottomOf="@+id/etOrganizationDetails"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/etDonationItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="What items you want to donate?"
+            app:layout_constraintTop_toBottomOf="@+id/etOrganizationDetails"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
 
-            <EditText
-                android:id="@+id/etDonationQuantity"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="How many items you want to donate?"
-                app:layout_constraintTop_toBottomOf="@+id/etDonationItem"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" />
+        <EditText
+            android:id="@+id/etDonationQuantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="How many items you want to donate?"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@+id/etDonationItem"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
 
-            <EditText
-                android:id="@+id/etAddress"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Address"
-                app:layout_constraintTop_toBottomOf="@+id/etDonationQuantity"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Address(Street, Apt, ZIP)"
+            app:layout_constraintTop_toBottomOf="@+id/etDonationQuantity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
 
-            <EditText
-                android:id="@+id/etPreferredDate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Preferred Date"
-                app:layout_constraintTop_toBottomOf="@+id/etAddress"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp" />
-
-            <EditText
-                android:id="@+id/etPreferredTime"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Preferred Time"
-                app:layout_constraintTop_toBottomOf="@+id/etPreferredDate"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" />
-
-            <EditText
-                android:id="@+id/etAdditionalInformation"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Additional Information"
-                app:layout_constraintTop_toBottomOf="@+id/etPreferredTime"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp" />
+        <EditText
+            android:id="@+id/etPreferredDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Preferred Date (YYYY-MM-DD)"
+            android:inputType="date"
+            android:digits="0123456789-"
+            app:layout_constraintTop_toBottomOf="@+id/etAddress"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
 
 
-            <Button
-                android:id="@+id/btnSchedulePickup"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Schedule Pickup"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/etAdditionalInformation"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/etPreferredTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Preferred Time (HH:MM)"
+            android:inputType="text"
+            android:digits="0123456789:"
+            app:layout_constraintTop_toBottomOf="@+id/etPreferredDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/etAdditionalInformation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Additional Information"
+            app:layout_constraintTop_toBottomOf="@+id/etPreferredTime"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+
+        <Button
+            android:id="@+id/btnSchedulePickup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Schedule Pickup"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/etAdditionalInformation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
-
-
-
