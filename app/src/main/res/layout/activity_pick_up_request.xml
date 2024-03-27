@@ -37,32 +37,39 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp" />
 
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tvOrganizationName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Organization Name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@+id/tvPickupRequestFormHeading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:paddingTop="8dp" />
+            android:layout_marginTop="16dp">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etOrganizationName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="What items you want to donate?" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tvOrganizationDetails"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Organization Phone Number"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@+id/tvOrganizationName"
+            app:layout_constraintTop_toBottomOf="@+id/tvPickupRequestFormHeading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etOrganizationDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="What items you want to donate?" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
