@@ -2,6 +2,7 @@ package com.example.charitymiles;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,7 @@ public class PickUpRequest extends AppCompatActivity {
 
     private EditText etOrganizationName, etOrganizationDetails;
     private EditText etAddress, etDonationQuantity,etDonationItem;
-    private EditText etPreferredDate, etPreferredTime;
+    private EditText etPreferredDate, etPreferredTime, etAdditionalInformation;
     private FirebaseAuth mAuth;
     private Button btnSchedulePickup;
     private DatabaseReference myRef;
@@ -38,6 +39,7 @@ public class PickUpRequest extends AppCompatActivity {
         etPreferredDate=findViewById(R.id.etPreferredDate);
         etPreferredTime = findViewById(R.id.etPreferredTime);
         btnSchedulePickup = findViewById(R.id.btnSchedulePickup);
+        etAdditionalInformation = findViewById(R.id.etAdditionalInformation);
         mAuth = FirebaseAuth.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference("Donations");
 
@@ -57,9 +59,17 @@ public class PickUpRequest extends AppCompatActivity {
             public void onClick(View v) {
                 final String OrgName = etOrganizationName.getText().toString().trim();
                 final String desAddress = etAddress.getText().toString().trim();
+                final String donationQuantity = etDonationQuantity.getText().toString().trim();
+                final String donationItem = etDonationItem.getText().toString().trim();
                 final String date = etPreferredDate.getText().toString().trim();
                 final String time = etPreferredTime.getText().toString().trim();
+                final String addInfo = etAdditionalInformation.getText().toString().trim();
                 final String OrgId = Uid;
+
+                if (desAddress.isEmpty() || donationQuantity.isEmpty() || donationItem.isEmpty() || date.isEmpty() || time.isEmpty()) {
+                    Toast.makeText(PickUpRequest.this, "All fields are required.", Toast.LENGTH_SHORT).show();
+                    return; // Stop the execution if any field is empty.
+                }
 
                 FirebaseUser Donor = mAuth.getCurrentUser();
                 if(Donor != null){
@@ -71,9 +81,12 @@ public class PickUpRequest extends AppCompatActivity {
                     donation.put("time",time);
                     donation.put("OrgId",OrgId);
                     donation.put("DonorId",DonorId);
+                    donation.put("AddInfo",addInfo);
 
                     myRef.push().setValue(donation).addOnSuccessListener(aVoid ->{
-                        Toast.makeText(PickUpRequest.this, "UDonation Requested", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PickUpRequest.this, "Donation Requested", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(PickUpRequest.this,DonorFinal.class);
+                        startActivity(intent);
 
                     }).addOnFailureListener(aVoid ->{
                         Toast.makeText(PickUpRequest.this, "Failed", Toast.LENGTH_SHORT).show();
@@ -85,7 +98,7 @@ public class PickUpRequest extends AppCompatActivity {
         });
 
 
-        Toast.makeText(PickUpRequest.this,""+Uid,Toast.LENGTH_LONG).show();
+        //Toast.makeText(PickUpRequest.this,""+Uid,Toast.LENGTH_LONG).show();
 
 
     }
