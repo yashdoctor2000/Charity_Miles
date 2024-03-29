@@ -1,7 +1,11 @@
 package com.example.charitymiles;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +14,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,8 +24,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +44,9 @@ public class DonorHomePage extends AppCompatActivity {
     private RecyclerView recyclerViewOrganizations;
     private OrganizationAdapter organizationAdapter;
     private DatabaseReference databaseReference;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
+    private NavigationView navigationView;
 
 
     @Override
@@ -45,8 +58,56 @@ public class DonorHomePage extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        navigationView=findViewById(R.id.nav_view);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         initializeSpinner();
         setupRecyclerView();
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.nav_profile) {
+                    //Toast.makeText(getApplicationContext(),"hello",Toast.LENGTH_LONG).show();
+                    // Handle profile selection
+                } else if (id == R.id.nav_contact_us) {
+                    // Handle contact-us selection
+                } else if (id == R.id.nav_about_us) {
+                    // Handle about-us selection
+                } else if (id == R.id.nav_sign_out) {
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent(DonorHomePage.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
+
+                // Close the drawer after action
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupRecyclerView() {
@@ -60,6 +121,13 @@ public class DonorHomePage extends AppCompatActivity {
                 R.array.donation_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDonationTypes.setAdapter(adapter);
+
+        // Set the AutoCompleteTextView to show the first item as default
+        if (adapter.getCount() > 0) {
+            String defaultValue = adapter.getItem(0).toString();
+            spinnerDonationTypes.setText(defaultValue, false); // Prevents the dropdown from showing
+            loadOrganizations(defaultValue); // Load organizations based on the default donation type
+        }
         spinnerDonationTypes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
