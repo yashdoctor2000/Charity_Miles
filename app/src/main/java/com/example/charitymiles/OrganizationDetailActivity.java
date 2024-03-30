@@ -26,11 +26,11 @@ public class OrganizationDetailActivity extends AppCompatActivity {
 
 
         OrganizationModel organization = (OrganizationModel) getIntent().getSerializableExtra("OrganizationDetail");
-
-        textViewDetailDescription.setText(organization.getOrgDescription());
+        textViewUid.setText(organization.getOrgDescription());
+        textViewDetailDescription.setText(organization.getorgName());
         textViewDetailContact.setText(organization.getOrgContact());
         textViewDetailAddress.setText(organization.getAddress());
-        textViewUid.setText(organization.getUid());
+
 
 // For the contact number to be clickable and open the dialer
         textViewDetailContact.setOnClickListener(v -> {
@@ -41,6 +41,5 @@ public class OrganizationDetailActivity extends AppCompatActivity {
 
 // Assuming you're using Glide for image loading
         Glide.with(this).load(organization.getimageUrl()).into(imageViewDetailPhoto);
-
     }
 }
