@@ -42,8 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="ID Value"
+                android:text="Name"
                 android:textSize="20sp" />
 
             <!-- Description -->
@@ -60,7 +59,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
-                android:gravity="center"
                 android:text="Description Value"
                 android:textSize="16sp" />
 
@@ -86,7 +84,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:autoLink="phone"
-                android:gravity="center"/>
+                />
 
             <!-- Address -->
             <TextView
@@ -102,7 +100,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="8dp"
-                android:gravity="center"
                 android:text="Address Value"
                 android:textSize="18sp" />
 
