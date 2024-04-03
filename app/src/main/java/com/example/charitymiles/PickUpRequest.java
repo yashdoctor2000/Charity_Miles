@@ -77,6 +77,8 @@ public class PickUpRequest extends AppCompatActivity {
                     Map<String, Object> donation = new HashMap<>();
                     donation.put("OrgName", OrgName);
                     donation.put("desAddress", desAddress);
+                    donation.put("donationItem",donationItem);
+                    donation.put("donationQuantity", donationQuantity);
                     donation.put("date",date);
                     donation.put("time",time);
                     donation.put("OrgId",OrgId);
