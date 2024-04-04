@@ -72,7 +72,9 @@ public class MainActivity extends Activity {
                                                     Intent intent = new Intent(MainActivity.this, DonorHomePage.class);
                                                     startActivity(intent);
                                                 } else if (role.equals("Receiver")) {
-                                                    Toast.makeText(getApplicationContext(),"Redirect to Receiver",Toast.LENGTH_LONG).show();
+                                                    Intent intent = new Intent(MainActivity.this, ReceiverHomePage.class);
+                                                    startActivity(intent);
+                                                    //Toast.makeText(getApplicationContext(),"Redirect to Receiver",Toast.LENGTH_LONG).show();
                                                 }
                                                 else{
                                                     Toast.makeText(getApplicationContext(),"Can't get value: "+role,Toast.LENGTH_LONG).show();
