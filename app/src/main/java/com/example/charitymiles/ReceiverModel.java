@@ -14,12 +14,14 @@ public class ReceiverModel implements Serializable {
     private String donationItem;
     private String donationQuantity;
     private String time;
+    private String Contact;
 
     public ReceiverModel(){
 
     }
 
-    public ReceiverModel(String Uid, String DonorId, String OrgId, String DonorName, int IsStatus, String OrgName, String date, String desAddress, String donationItem, String donationQuantity, String time){
+
+    public ReceiverModel(String Uid, String DonorId, String OrgId, String DonorName, int IsStatus, String OrgName, String date, String desAddress, String donationItem, String donationQuantity, String time, String Contact){
         this.OrgId = OrgId;
         this.DonorName = DonorName;
         this.IsStatus = IsStatus;
@@ -31,6 +33,7 @@ public class ReceiverModel implements Serializable {
         this.donationItem = donationItem;
         this.donationQuantity = donationQuantity;
         this.time = time;
+        this.Contact = Contact;
     }
 
     public String getUid() {
@@ -119,5 +122,12 @@ public class ReceiverModel implements Serializable {
 
     public void setTime(String time) {
         this.time = time;
+    }
+    public String getContact() {
+        return Contact;
+    }
+
+    public void setContact(String contact) {
+        this.Contact = contact;
     }
 }

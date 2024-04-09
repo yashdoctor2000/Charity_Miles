@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class PickUpRequest extends AppCompatActivity {
 
-    private EditText etOrganizationName, etOrganizationDetails;
+    private EditText etOrganizationName, etOrganizationDetails, etContactNumber;
     private EditText etAddress, etDonationQuantity,etDonationItem;
     private EditText etPreferredDate, etPreferredTime, etAdditionalInformation;
     private FirebaseAuth mAuth;
@@ -43,6 +43,7 @@ public class PickUpRequest extends AppCompatActivity {
         etPreferredDate=findViewById(R.id.etPreferredDate);
         etPreferredTime = findViewById(R.id.etPreferredTime);
         btnSchedulePickup = findViewById(R.id.btnSchedulePickup);
+        etContactNumber = findViewById(R.id.etContactNumber);
         etAdditionalInformation = findViewById(R.id.etAdditionalInformation);
         mAuth = FirebaseAuth.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference("Donations");
@@ -70,10 +71,11 @@ public class PickUpRequest extends AppCompatActivity {
                 final String date = etPreferredDate.getText().toString().trim();
                 final String time = etPreferredTime.getText().toString().trim();
                 final String addInfo = etAdditionalInformation.getText().toString().trim();
+                final String contact = etContactNumber.getText().toString().trim();
                 final String OrgId = Uid;
                 final int status = 1;
 
-                if (desAddress.isEmpty() || donationQuantity.isEmpty() || donationItem.isEmpty() || date.isEmpty() || time.isEmpty()) {
+                if (desAddress.isEmpty() || donationQuantity.isEmpty() || donationItem.isEmpty() || date.isEmpty() || time.isEmpty() || contact.isEmpty()) {
                     Toast.makeText(PickUpRequest.this, "All fields are required.", Toast.LENGTH_SHORT).show();
                     return; // Stop the execution if any field is empty.
                 }
@@ -101,6 +103,7 @@ public class PickUpRequest extends AppCompatActivity {
                                 donation.put("OrgId",OrgId);
                                 donation.put("DonorId",DonorId);
                                 donation.put("AddInfo",addInfo);
+                                donation.put("Contact",contact);
 
                                 request.put("OrgName", OrgName);
                                 request.put("desAddress", desAddress);
@@ -113,6 +116,7 @@ public class PickUpRequest extends AppCompatActivity {
                                 request.put("DonorId",DonorId);
                                 request.put("AddInfo",addInfo);
                                 request.put("IsStatus", status);
+                                request.put("Contact", contact);
 
                                 myRef.push().setValue(donation).addOnSuccessListener(aVoid ->{
 

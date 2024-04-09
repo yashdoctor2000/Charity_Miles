@@ -286,8 +286,8 @@ public class ReceiverHomePage extends AppCompatActivity {
                         int position = getBindingAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             ReceiverModel selectedReceiver = receivers.get(position);
-                            Intent detailIntent = new Intent(context, OrganizationDetailActivity.class);
-                            detailIntent.putExtra("OrganizationDetail", selectedReceiver);
+                            Intent detailIntent = new Intent(context, PickUpDetailPage.class);
+                            detailIntent.putExtra("PickUpDetails", selectedReceiver);
                             context.startActivity(detailIntent);
                         }
                     }
