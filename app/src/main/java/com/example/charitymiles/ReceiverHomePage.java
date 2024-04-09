@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -245,15 +246,16 @@ public class ReceiverHomePage extends AppCompatActivity {
 
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.organization_summary_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.donor_summary_item, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             ReceiverModel receiver = receivers.get(position);
-            holder.textViewOrganizationName.setText(receiver.getDonorName());
-            holder.textViewOrganizationVision.setText(String.valueOf(receiver.getIsStatus()));
+            holder.textViewDonorName.setText("Name: " + receiver.getDonorName());
+            String text = "Items <b>" + receiver.getDonationQuantity() + "</b> requested for pickup.";
+            holder.textViewNumberofItems.setText(Html.fromHtml(text));
 
         }
 
@@ -267,16 +269,16 @@ public class ReceiverHomePage extends AppCompatActivity {
             notifyDataSetChanged();
         }
         public class ViewHolder extends RecyclerView.ViewHolder {
-            TextView textViewOrganizationName;
-            TextView textViewOrganizationVision;
-            ImageView imageViewOrganizationPhoto;
+            TextView textViewDonorName;
+            TextView textViewNumberofItems;
+            //ImageView imageViewOrganizationPhoto;
 
             ViewHolder(View itemView) {
                 super(itemView);
 //                super(itemView);
-                textViewOrganizationName = itemView.findViewById(R.id.textViewOrganizationName);
-                imageViewOrganizationPhoto = itemView.findViewById(R.id.imageViewOrganizationPhoto);
-                textViewOrganizationVision = itemView.findViewById(R.id.textViewOrganizationVision);
+                textViewDonorName = itemView.findViewById(R.id.textViewDonorName);
+                //imageViewOrganizationPhoto = itemView.findViewById(R.id.imageViewOrganizationPhoto);
+                textViewNumberofItems = itemView.findViewById(R.id.textViewNumberofItems);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
