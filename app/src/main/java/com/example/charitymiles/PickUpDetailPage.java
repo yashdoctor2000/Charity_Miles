@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -49,6 +50,23 @@ public class PickUpDetailPage extends AppCompatActivity {
         textViewDateTime.setText(receiver.getDate() + " "+ receiver.getTime());
         textViewDetailContact.setText(receiver.getContact());
         textViewDetailAddress.setText(receiver.getDesAddress());
+
+        textViewDetailAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String address = textViewDetailAddress.getText().toString();
+                Uri addressUri = Uri.parse("geo:0,0?q=" + Uri.encode(address));
+                Intent intent = new Intent(Intent.ACTION_VIEW, addressUri);
+
+                // Start the intent with a chooser to let the user select which app to use
+                Intent chooser = Intent.createChooser(intent, "Open with");
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(chooser);
+                } else {
+                    Toast.makeText(PickUpDetailPage.this, "Google Maps is not installed", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         buttonPickUpComplete.setOnClickListener(new View.OnClickListener() {
             @Override
