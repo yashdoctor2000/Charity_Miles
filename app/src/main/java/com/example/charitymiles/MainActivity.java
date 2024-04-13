@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button loginButton;
-    private Button signUpButton;
+    private TextView signUpButton;
     private TextView forgotPassword;
     private FirebaseDatabase database;
     private DatabaseReference usersRef;
