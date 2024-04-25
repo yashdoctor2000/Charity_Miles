@@ -94,12 +94,43 @@ public class DonorHomePage extends AppCompatActivity {
                     finish();
                     return true;
                 }
+                else if(id == R.id.nav_report){
+                    return true;
+                }
 
                 // Close the drawer after action
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
+        checkUserRoleAndAdjustMenu();
+
+    }
+
+    private void checkUserRoleAndAdjustMenu() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String uid = currentUser.getUid();
+            databaseReference.child("Users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        String role = dataSnapshot.child("role").getValue(String.class);
+                        MenuItem reportItem = navigationView.getMenu().findItem(R.id.nav_report);
+                        if ("Receiver".equals(role)) {
+                            reportItem.setVisible(true);
+                        } else {
+                            reportItem.setVisible(false);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.d("Firebase", "Failed to retrieve user role: " + databaseError.getMessage());
+                }
+            });
+        }
     }
 
     @Override

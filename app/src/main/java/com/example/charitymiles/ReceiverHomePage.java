@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +19,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -28,7 +33,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.Manifest;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,6 +46,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +61,8 @@ public class ReceiverHomePage extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private FirebaseAuth mAuth;
     private NavigationView navigationView;
+    private static final int PERMISSION_REQUEST_CODE = 1;  // You can use any unique integer here.
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +72,7 @@ public class ReceiverHomePage extends AppCompatActivity {
         recyclerViewPickUps = findViewById(R.id.recyclerViewPickUps);
         navigationView=findViewById(R.id.nav_view);
         mAuth = FirebaseAuth.getInstance();
+        checkPermissions();
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -101,12 +114,98 @@ public class ReceiverHomePage extends AppCompatActivity {
                     finish();
                     return true;
                 }
+                else if (id == R.id.nav_report) {
+                    generateReport();
+                    return true;
+                }
 
                 // Close the drawer after action
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
+    }
+
+    private void generateReport() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String currentUserId = currentUser.getUid();
+            DatabaseReference donationsRef = FirebaseDatabase.getInstance().getReference("Donations");
+
+            donationsRef.orderByChild("OrgId").equalTo(currentUserId)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            StringBuilder csvBuilder = new StringBuilder("Name,Date,Contact,Quantity,Item\n");
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                DonationModel donation = snapshot.getValue(DonationModel.class);
+                                if (donation != null) {
+                                    csvBuilder.append(String.format("%s,%s,%s,%s,%s\n",
+                                            donation.getDonorName(),
+                                            donation.getDate(),
+                                            donation.getContact(),
+                                            donation.getDonationQuantity(),
+                                            donation.getDonationItem()));
+                                }
+                            }
+                            try {
+                                saveReportToFile(csvBuilder.toString());
+                            } catch (IOException e)     {
+                                Log.e("ReceiverHomePage", "Error writing report", e);
+                                Toast.makeText(ReceiverHomePage.this, "Failed to generate report", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e("DatabaseError", "Error fetching donations", databaseError.toException());
+                        }
+                    });
+        }
+        else {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void saveReportToFile(String reportData) throws IOException {
+        File reportFile = new File(getExternalFilesDir(null), "DonationReport.csv");
+        try (FileWriter writer = new FileWriter(reportFile, false)) {
+            writer.write(reportData);
+            Toast.makeText(this, "Report saved to: " + reportFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+            openFile(reportFile);
+        }
+    }
+
+    private void openFile(File file) {
+        Uri uri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(uri);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        try {
+            startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(this, "No application available to view this file", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void checkPermissions() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+            }, PERMISSION_REQUEST_CODE);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission Denied to access external storage", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void listenForNewPickupRequests() {
