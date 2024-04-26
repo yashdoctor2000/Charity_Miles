@@ -12,4 +12,7 @@
     <item
         android:id="@+id/nav_sign_out"
         android:title="Sign Out"/>
+    <item
+        android:id="@+id/nav_report"
+        android:title="Generate Report"/>
 </menu>

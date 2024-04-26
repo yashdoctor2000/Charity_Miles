@@ -44,6 +44,11 @@ public class PickUpDetailPage extends AppCompatActivity {
         String pickupRequestId = receiver.getUid();
         //Toast.makeText(PickUpDetailPage.this,""+id,Toast.LENGTH_LONG).show();
 
+        if(receiver.getIsStatus() == 0){
+            buttonPickUpComplete.setEnabled(false);
+            buttonPickUpComplete.setVisibility(View.INVISIBLE);
+        }
+
         textViewDonorName.setText(receiver.getDonorName());
         textViewTypeOfItems.setText(receiver.getDonationItem());
         textViewNumberofItems.setText(receiver.getDonationQuantity());
