@@ -30,7 +30,7 @@ public class DonorFinal extends AppCompatActivity {
         tvCongratsDetail = findViewById(R.id.tvCongratsDetail);
 
 
-        OrganizationModel organization = (OrganizationModel) getIntent().getSerializableExtra("OrganizationForPickup");
+        OrganizationModel organization = (OrganizationModel) getIntent().getSerializableExtra("DonatedOrg");
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
